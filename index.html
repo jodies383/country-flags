@@ -9,24 +9,17 @@
     <script type="text/x-template" class="countries">
             <ul>
             {{#each country}}
+            <ul>
             {{this}}
+            </ul>
             {{/each}}
             </ul>
     </script>
-    <script type="text/x-template" class="flags">
-        <ul>
-        {{#each flag}}
-        {{this}}
-        {{/each}}
-        </ul>
-</script>
     <title>Country Flags</title>
 </head>
 <body>
     Country flag list
     <div class="displayCountries">
-    </div>
-    <div class="displayFlags">
     </div>
     <input type="text" class="Add">
     <button>
@@ -38,5 +31,4 @@
     <input type="text" class="search" placeholder="search for a country...">
 </body>
 <script src="index.js"></script>
-
 </html>
