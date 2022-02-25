@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200&display=swap');
+
+body{
+    font-family: 'Josefin Sans', sans-serif;
+    text-align: center;
+}
+button {
+    background-color: rgb(138, 143, 189);
+    border: none;
+    border-radius: 5px;
+    width: 100px;
+    padding: 11px;
+    font-size: 16px;
+    color: white;
+    margin: 10px;
+}
+button:hover {
+    cursor: pointer;
+    background-color: #d5c1da;
+    outline: 0;
+}
+input[type="number"], input[type="search"], input[type="text"], textarea, select {
+    height: 38px;
+    padding: 6px 10px;
+    background-color: #fff;
+    border: 1px solid #D1D1D1;
+    border-radius: 4px;
+    box-shadow: none;
+    box-sizing: border-box;
+    margin: 10px;
+
+}
