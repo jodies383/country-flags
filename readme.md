@@ -1,4 +1,5 @@
 Country flag list
+
 Given arrays of Country names and flags create a web page that show a list of countries with their flags.
 
 const countries = ["Argentina", "Brazil", "Chile", "Zambia", "Uganda", "Malawi", "Rwanda", "Ireland", "Switzerland"];
