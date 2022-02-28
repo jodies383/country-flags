@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200&display=swap');
-
-body{
+body {
     font-family: 'Josefin Sans', sans-serif;
     text-align: center;
+}
+h1{
+    font-size: 50px;
 }
 button {
     background-color: rgb(138, 143, 189);
@@ -14,12 +16,18 @@ button {
     color: white;
     margin: 10px;
 }
+
 button:hover {
     cursor: pointer;
-    background-color: #d5c1da;
+    background-color: #a5b8ca;
     outline: 0;
 }
-input[type="number"], input[type="search"], input[type="text"], textarea, select {
+
+input[type="number"],
+input[type="search"],
+input[type="text"],
+textarea,
+select {
     height: 38px;
     padding: 6px 10px;
     background-color: #fff;
@@ -28,5 +36,28 @@ input[type="number"], input[type="search"], input[type="text"], textarea, select
     box-shadow: none;
     box-sizing: border-box;
     margin: 10px;
+}
 
+.search-countries {
+    float: left;
+}
+
+.displayCountries {
+    padding: 0 0 0 0;
+    text-align: center;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.formatCountries {
+    height: 38px;
+    padding: 10px 2px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    font-weight: bold;
+    text-align: center;
+    width: 15%;
+    font-size: 25px;
 }
