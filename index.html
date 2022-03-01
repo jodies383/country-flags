@@ -10,7 +10,7 @@
     <script type="text/x-template" class="countries">
         {{#each country}}
         <ul class="formatCountries">
-            {{this.country}}{{this.flag}}
+            {{this.country}} {{this.flag}}
         </ul>
         {{/each}}
     </script>
@@ -23,8 +23,11 @@
     </h1>
     <div class="search-countries">
         <input type="text" class="search" placeholder="search for a country...">
+        <button class="sort">
+            Sort (A-Z)
+        </button>
     </div>
-    <div>
+    <div class="addNewCountryDiv">
         <input type="text" class="addCountry" placeholder="add a country">
         <input type="text" class="addFlag" placeholder="add corresponding flag">
 
@@ -32,11 +35,10 @@
             Add a new country
         </button>
     </div>
-
-    <button class="sort">
-        Sort (A-Z)
-    </button>
-    <div class="displayCountries">
+    <div class="countriesDiv">
+       
+        <div class="displayCountries">
+        </div>
     </div>
 </body>
 <script src="index.js"></script>

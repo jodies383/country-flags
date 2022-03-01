@@ -6,7 +6,10 @@ const addFlags = document.querySelector(".addFlag")
 const addCountryBtn = document.querySelector(".add-country-btn")
 const sortBtn = document.querySelector(".sort")
 const searchFilter = document.querySelector(".search-countries")
-const countries = [{
+const regex = /[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]/
+const lettersRegex = /^[A-Za-z\s]+$/
+
+let countries = [{
     country: "Argentina",
     flag: "🇦🇷"
 },
@@ -43,31 +46,27 @@ const countries = [{
     flag: "🇨🇭"
 }
 ]
+if (localStorage['countryList']) {
+    countries = JSON.parse(localStorage.getItem('countryList'));
 
+}
 let displayCountries = countriesTemplate({
     country: countries
 });
 
 addCountryBtn.addEventListener('click', () => {
-    //no duplicates
-    //regex for letters only
-    //validate emojis
-    // let countryNames = countries.map(function(values){ return values.name });
-    // let duplicateCheck = countryNames.some(function(item, idx){ 
-    //     return countryNames.indexOf(item) != idx 
-    // });
 
     let addedCountry = addCountries.value
     let addedFlag = addFlags.value
+    if (addedCountry) {
+        if (lettersRegex.test(addedCountry) && regex.test(addedFlag)) {
+            countries.push({ country: addedCountry, flag: addedFlag })
+            localStorage.setItem('countryList', JSON.stringify(countries));
 
-    countries.push({ country: addedCountry, flag: addedFlag })
+        }
+    }
 
 
-    // if (addedCountry == duplicateCheck) {
-    //     
-    // }
-
-    // const map = new Map(countries.map(country => [country.id, country]));
 
     displayCountries = countriesTemplate({
         country: countries
@@ -102,7 +101,7 @@ if (searchFilter) {
         const filterCountries = filSearch.target.value;
 
         const displayFilter = countries.filter(function (filtered) {
-            return filtered.country.includes(filterCountries);
+            return filtered.country.toLowerCase().includes(filterCountries);
         });
         displayCountries = countriesTemplate({
             country: displayFilter

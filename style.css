@@ -1,11 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wght@300&display=swap');
 body {
     font-family: 'Josefin Sans', sans-serif;
     text-align: center;
 }
-h1{
+
+h1 {
     font-size: 50px;
 }
+
 button {
     background-color: rgb(138, 143, 189);
     border: none;
@@ -40,6 +43,10 @@ select {
 
 .search-countries {
     float: left;
+}
+
+.addNewCountryDiv{
+    margin-right: -35%;
 }
 
 .displayCountries {
