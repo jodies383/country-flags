@@ -6,6 +6,7 @@ const addFlags = document.querySelector(".addFlag")
 const addCountryBtn = document.querySelector(".add-country-btn")
 const sortBtn = document.querySelector(".sort")
 const searchFilter = document.querySelector(".search-countries")
+const errorMessage = document.querySelector(".errorMessage")
 const regex = /[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]/
 const lettersRegex = /^[A-Za-z\s]+$/
 
@@ -54,27 +55,48 @@ let displayCountries = countriesTemplate({
     country: countries
 });
 
+function duplicateCountry(arr, val) {
+    return arr.some(function (arrVal) {
+        return val === arrVal.country;
+    });
+}
+function duplicateFlag(arr, val) {
+    return arr.some(function (arrVal) {
+        return val === arrVal.flag;
+    });
+}
 addCountryBtn.addEventListener('click', () => {
-
-    let addedCountry = addCountries.value
+    let theCountry = addCountries.value
     let addedFlag = addFlags.value
-    if (addedCountry) {
-        if (lettersRegex.test(addedCountry) && regex.test(addedFlag)) {
-            countries.push({ country: addedCountry, flag: addedFlag })
-            localStorage.setItem('countryList', JSON.stringify(countries));
+
+    if (!theCountry || !addedFlag) {
+        errorMessage.innerHTML = "Please add a valid country"
+        setTimeout(() => { errorMessage.innerHTML = "" }, 2000);
+    } else {
+        let addedCountry = theCountry.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+        if (duplicateCountry(countries, addedCountry) === true || duplicateFlag(countries, addedFlag) === true) {
+            errorMessage.innerHTML = "Country or flag has already been added"
+            setTimeout(() => { errorMessage.innerHTML = "" }, 2000);
+        }
+        else {
+            if (lettersRegex.test(addedCountry) && regex.test(addedFlag)) {
+                countries.push({ country: addedCountry, flag: addedFlag })
+                localStorage.setItem('countryList', JSON.stringify(countries));
+            }
+            else if (!lettersRegex.test(addedCountry) && !regex.test(addedFlag)) {
+                errorMessage.innerHTML = "Please add a valid country"
+                setTimeout(() => { errorMessage.innerHTML = "" }, 2000);
+            }
 
         }
     }
-
-
-
     displayCountries = countriesTemplate({
         country: countries
     });
 
     countryDiv.innerHTML = displayCountries
-
 });
+
 
 
 sortBtn.addEventListener('click', () => {
@@ -109,5 +131,4 @@ if (searchFilter) {
         countryDiv.innerHTML = displayCountries;
     })
 }
-
 countryDiv.innerHTML = displayCountries;
