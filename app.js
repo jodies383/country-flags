@@ -63,7 +63,7 @@ export const CountryFlags = () => {
             errorMessage = ("Please add a valid country and flag")
         }
         else {
-            if (duplicateCountry(countries, addedCountry) === false || duplicateFlag(countries, addedFlag) === false) {
+            if (duplicateCountry(countries, addedCountry) === false && duplicateFlag(countries, addedFlag) === false) {
                 if (lettersRegex.test(addedCountry) && regex.test(addedFlag)) {
                     countries.push({ country: addedCountry, flag: addedFlag })
                     localStorage.setItem('countryList', JSON.stringify(countries));
