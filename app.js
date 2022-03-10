@@ -59,14 +59,16 @@ export const CountryFlags = () => {
 
     const addCountry = (theCountry, addedFlag) => {
         const addedCountry = theCountry.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
-        if ((!theCountry || !addedFlag) || (!lettersRegex.test(addedCountry) && !regex.test(addedFlag))) {
+        if ((!lettersRegex.test(addedCountry) || !regex.test(addedFlag))){
             theMessage = ("Please add a valid country and flag")
         }
         else {
             if (duplicateCountry(countries, addedCountry) === false || duplicateFlag(countries, addedFlag) === false) {
-                countries.push({ country: addedCountry, flag: addedFlag })
-                localStorage.setItem('countryList', JSON.stringify(countries));
-                theMessage = ""
+                if (lettersRegex.test(addedCountry) && regex.test(addedFlag)) {
+                    countries.push({ country: addedCountry, flag: addedFlag })
+                    localStorage.setItem('countryList', JSON.stringify(countries));
+                    theMessage = ""
+                }
             }
 
             else {
