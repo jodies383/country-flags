@@ -1,6 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Arsenal&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Jaldi&display=swap');
 
 body {
@@ -74,10 +72,6 @@ select {
     font-size: 22px;
     font-weight: bold;
 }
-
-/* .addNewCountryDiv {
-    margin-right: -35%;
-} */
 
 .displayCountries {
     padding: 0 0 0 0;

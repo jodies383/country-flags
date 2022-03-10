@@ -1,8 +1,8 @@
-function CountryFlags() {
+export const CountryFlags = () => {
 
     const regex = /[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]/
     const lettersRegex = /^[A-Za-z\s]+$/
-
+    let theMessage
     let countries = [{
         country: "Argentina",
         flag: "🇦🇷"
@@ -44,37 +44,41 @@ function CountryFlags() {
         countries = JSON.parse(localStorage.getItem('countryList'));
 
     }
-    function duplicateCountry(arr, val) {
+
+    const duplicateCountry = (arr, val) => {
         return arr.some(function (arrVal) {
             return val === arrVal.country;
         });
     }
-    function duplicateFlag(arr, val) {
+
+    const duplicateFlag = (arr, val) => {
         return arr.some(function (arrVal) {
             return val === arrVal.flag;
         });
     }
-    function addCountry(theCountry, addedFlag) {
-        if (!theCountry || !addedFlag) {
-            return ("Please add a valid country and flag")
-        } else {
-            let addedCountry = theCountry.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
-            if (duplicateCountry(countries, addedCountry) === true || duplicateFlag(countries, addedFlag) === true) {
-                return ("Country or flag has already been added")
-            }
-            else {
-                if (lettersRegex.test(addedCountry) && regex.test(addedFlag)) {
-                    countries.push({ country: addedCountry, flag: addedFlag })
-                    localStorage.setItem('countryList', JSON.stringify(countries));
-                }
-                else if (!lettersRegex.test(addedCountry) && !regex.test(addedFlag)) {
-                    return ("Please add a valid country and flag")
-                }
 
+    const addCountry = (theCountry, addedFlag) => {
+        const addedCountry = theCountry.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+        if ((!theCountry || !addedFlag) || (!lettersRegex.test(addedCountry) && !regex.test(addedFlag))) {
+            theMessage = ("Please add a valid country and flag")
+        }
+        else {
+            if (duplicateCountry(countries, addedCountry) === false || duplicateFlag(countries, addedFlag) === false) {
+                countries.push({ country: addedCountry, flag: addedFlag })
+                localStorage.setItem('countryList', JSON.stringify(countries));
+                theMessage = ""
+            }
+
+            else {
+                theMessage = ("Country or flag has already been added")
             }
         }
     }
-    function sortCountries() {
+    const returnMessage = () => {
+        return theMessage
+    }
+
+    const sortCountries = () => {
         countries.sort(function (a, b) {
             let nameA = a.country.toUpperCase();
             let nameB = b.country.toUpperCase();
@@ -88,18 +92,21 @@ function CountryFlags() {
         });
 
     }
-    function searchCountries(filterCountries) {
+    const searchCountries = (filterCountries) => {
 
         const displayFilter = countries.filter(function (filtered) {
             return filtered.country.toLowerCase().includes(filterCountries);
         });
         return displayFilter
     }
-    function returnCountries() {
+
+    const returnCountries = () => {
         return countries
     }
+
     return {
         addCountry,
+        returnMessage,
         sortCountries,
         searchCountries,
         returnCountries

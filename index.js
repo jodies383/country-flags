@@ -1,3 +1,5 @@
+import {CountryFlags} from "./app.js"
+
 const templateCountries = document.querySelector(".countries").innerHTML
 const countriesTemplate = Handlebars.compile(templateCountries)
 const countryDiv = document.querySelector(".displayCountries")
@@ -7,26 +9,23 @@ const addCountryBtn = document.querySelector(".add-country-btn")
 const sortBtn = document.querySelector(".sort")
 const searchFilter = document.querySelector(".search-countries")
 const errorMessage = document.querySelector(".errorMessage")
-const regex = /[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]/
-const lettersRegex = /^[A-Za-z\s]+$/
-
-let countryInst = CountryFlags();
+let countryInst = CountryFlags()
+let countryList = countryInst.returnCountries()
 
 let displayCountries = countriesTemplate({
     country: countryInst.returnCountries()
 });
 
 addCountryBtn.addEventListener('click', () => {
-    let theCountry = addCountries.value
-    let addedFlag = addFlags.value
+    const theCountry = addCountries.value
+    const addedFlag = addFlags.value
     
     countryInst.addCountry(theCountry, addedFlag)
-    errorMessage.innerHTML = countryInst.addCountry(theCountry, addedFlag)
+    errorMessage.innerHTML = countryInst.returnMessage()
     setTimeout(() => { errorMessage.innerHTML = "" }, 2000);
 
-
     displayCountries = countriesTemplate({
-        country: countryInst.returnCountries()
+        country: countryList
     });
     countryDiv.innerHTML = displayCountries
 });
@@ -34,7 +33,7 @@ addCountryBtn.addEventListener('click', () => {
 sortBtn.addEventListener('click', () => {
     countryInst.sortCountries()
     displayCountries = countriesTemplate({
-        country: countryInst.returnCountries()
+        country: countryList
     });
     countryDiv.innerHTML = displayCountries
 
