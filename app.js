@@ -2,7 +2,7 @@ export const CountryFlags = () => {
 
     const regex = /[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]/
     const lettersRegex = /^[A-Za-z\s]+$/
-    let theMessage
+    let errorMessage
     let countries = [{
         country: "Argentina",
         flag: "🇦🇷"
@@ -60,24 +60,24 @@ export const CountryFlags = () => {
     const addCountry = (theCountry, addedFlag) => {
         const addedCountry = theCountry.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
         if ((!lettersRegex.test(addedCountry) || !regex.test(addedFlag))){
-            theMessage = ("Please add a valid country and flag")
+            errorMessage = ("Please add a valid country and flag")
         }
         else {
             if (duplicateCountry(countries, addedCountry) === false || duplicateFlag(countries, addedFlag) === false) {
                 if (lettersRegex.test(addedCountry) && regex.test(addedFlag)) {
                     countries.push({ country: addedCountry, flag: addedFlag })
                     localStorage.setItem('countryList', JSON.stringify(countries));
-                    theMessage = ""
+                    errorMessage = ""
                 }
             }
 
             else {
-                theMessage = ("Country or flag has already been added")
+                errorMessage = ("Country or flag has already been added")
             }
         }
     }
     const returnMessage = () => {
-        return theMessage
+        return errorMessage
     }
 
     const sortCountries = () => {
